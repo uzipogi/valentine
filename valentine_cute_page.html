@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Will You Be My Valentine?</title>
+<style>
+  body {
+    margin: 0;
+    font-family: 'Comic Sans MS', 'Poppins', cursive;
+    background: #ffc0d9; /* pink background */
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    text-align: center;
+  }
+
+  .card {
+    position: relative;
+    z-index: 2;
+    background: white;
+    padding: 30px;
+    border-radius: 25px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    max-width: 420px;
+    width: 90%;
+  }
+
+  h1 {
+    color: #ff4f87;
+    margin-bottom: 10px;
+  }
+
+  p {
+    color: #555;
+  }
+
+  img {
+    width: 180px;
+    margin: 15px 0;
+  }
+
+  .buttons {
+    margin-top: 20px;
+  }
+
+  button {
+    padding: 12px 25px;
+    margin: 10px;
+    border: none;
+    border-radius: 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  #yesBtn {
+    background-color: #ff4f87;
+    color: white;
+  }
+
+  #noBtn {
+    background-color: #ccc;
+  }
+
+  #message {
+    margin-top: 15px;
+    font-weight: bold;
+    color: #ff4f87;
+  }
+
+  /* Hearts animation */
+  .heart {
+    position: absolute;
+    bottom: -20px;
+    color: #ff4f87;
+    font-size: 20px;
+    animation: floatUp 6s linear infinite;
+    opacity: 0.8;
+  }
+
+  @keyframes floatUp {
+    0% { transform: translateY(0) scale(1); opacity: 0.9; }
+    100% { transform: translateY(-110vh) scale(1.5); opacity: 0; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Floating hearts container -->
+<div id="hearts"></div>
+
+<div class="card">
+  <h1>💖 Will You Be My Valentine? 💖</h1>
+
+  <!-- Replace the src below with Nailong's picture file name -->
+  <img src="nailong.jpg" alt="Nailong Picture" />
+
+  <p>You can't escape this question 😜</p>
+
+  <div class="buttons">
+    <button id="yesBtn">YES 💘</button>
+    <button id="noBtn">NO 🙈</button>
+  </div>
+
+  <div id="message"></div>
+</div>
+
+<script>
+  const yesBtn = document.getElementById('yesBtn');
+  const noBtn = document.getElementById('noBtn');
+  const message = document.getElementById('message');
+  const heartsContainer = document.getElementById('hearts');
+
+  let yesSize = 16;
+
+  noBtn.addEventListener('click', () => {
+    yesSize += 8;
+    yesBtn.style.fontSize = yesSize + 'px';
+    yesBtn.style.padding = (12 + yesSize/4) + 'px ' + (25 + yesSize/4) + 'px';
+    message.textContent = "Are you sureeee? 😏";
+  });
+
+  yesBtn.addEventListener('click', () => {
+    message.textContent = "Yaaay! 💖 Best Valentine ever! 💕";
+    noBtn.style.display = 'none';
+  });
+
+  // Create floating hearts
+  function createHeart() {
+    const heart = document.createElement('div');
+    heart.classList.add('heart');
+    heart.style.left = Math.random() * 100 + 'vw';
+    heart.style.fontSize = (Math.random() * 20 + 10) + 'px';
+    heart.style.animationDuration = (Math.random() * 3 + 4) + 's';
+    heart.textContent = '💖';
+    heartsContainer.appendChild(heart);
+
+    setTimeout(() => {
+      heart.remove();
+    }, 7000);
+  }
+
+  setInterval(createHeart, 300);
+</script>
+
+</body>
+</html>
